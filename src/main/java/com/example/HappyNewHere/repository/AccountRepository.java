@@ -14,4 +14,5 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
     //userId 또는 닉네임과 일치하는 유저 모두 불러오기
     // 일부분만 일치해도 불러오기
     Page<Account> findByUserIdContainingOrNicknameContaining(String userId, String nickname, Pageable pageable);
+    Optional<Account> findByUserId(String userId);
 }

@@ -35,3 +35,10 @@ out/
 
 ### VS Code ###
 .vscode/
+
+
+src/main/resources/application-mariadb.properties
+src/main/resources/application-jwt.properties
+src/main/resources/application-kakao.properties
+src/main/resources/application-h2.properties
+src/main/resources/application.properties
