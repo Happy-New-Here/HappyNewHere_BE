@@ -24,7 +24,7 @@ public class AccountController {
 
     @GetMapping("/login/kakao")
     public ResponseEntity<?> login(
-            @RequestParam String code
+            @RequestParam("code") String code
     ) {
         String accessToken = kakaoService.kakaoToken(code);
         System.out.println(accessToken);

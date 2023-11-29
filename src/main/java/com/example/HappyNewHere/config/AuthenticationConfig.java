@@ -31,6 +31,7 @@ public class AuthenticationConfig {
                                 authorize
                                         .requestMatchers("/login/kakao","/index.html").permitAll()
                                         .requestMatchers("/test").hasAuthority("USER")
+                                        .requestMatchers("**").permitAll()
 //                                .requestMatchers("/user/signin","user/signup").permitAll()
 //                                .requestMatchers(HttpMethod.POST, "/**").authenticated()
 //                                .requestMatchers(HttpMethod.GET, "/**").authenticated()
