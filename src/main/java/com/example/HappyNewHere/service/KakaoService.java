@@ -43,7 +43,7 @@ public class KakaoService {
         HttpEntity<MultiValueMap<String, String>> kakaoTokenRequest = new HttpEntity<>(params, headers);
 
         ResponseEntity response = restTemplate.exchange(
-                "https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=3641163fbd0e73f9d1ce14d4388d37cc&redirect_uri=http://localhost:8080/login/kakao",
+                "https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${kakao.clientId}&redirect_uri=${kakao.redirectUrl}",
                 HttpMethod.GET,
                 null,
                 String.class

@@ -1,6 +1,6 @@
 package com.example.HappyNewHere.dto;
 
-import com.example.HappyNewHere.domain.Message;
+import com.example.HappyNewHere.domain.Messages;
 import java.time.LocalDateTime;
 import lombok.Data;
 @Data
@@ -14,14 +14,14 @@ public class MessageDto {
     private boolean isHidden;
 
     // entity -> dto
-    public MessageDto(Message message) {
-        this.messageId = message.getMessageId();
-        this.createdDate = message.getCreatedDate();
-        this.context = message.getContext();
-        this.sender = message.getSender();
-        this.receiver = message.getReceiver();
-        this.decorate = message.getDecorate();
-        this.isHidden = message.isHidden();
+    public MessageDto(Messages messages) {
+        this.messageId = messages.getMessageId();
+        this.createdDate = messages.getCreatedDate();
+        this.context = messages.getContext();
+        this.sender = messages.getSender();
+        this.receiver = messages.getReceiver();
+        this.decorate = messages.getDecorate();
+        this.isHidden = messages.isHidden();
     }
 
     public MessageDto(Long messageId, LocalDateTime createdDate, String context, String sender, String receiver,

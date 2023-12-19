@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-public class Message {
+public class Messages {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long messageId;
@@ -25,7 +25,7 @@ public class Message {
     private boolean isHidden;
 
     // dto -> entity
-    public Message(MessageDto messageDto) {
+    public Messages(MessageDto messageDto) {
         this.messageId = messageDto.getMessageId();
         this.createdDate = messageDto.getCreatedDate();
         this.context = messageDto.getContext();

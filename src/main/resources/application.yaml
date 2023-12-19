@@ -1,7 +1,6 @@
 spring:
   profiles:
     include: rds,jwt,kakao
-
   jpa:
     generate-ddl: true
     show-sql: true

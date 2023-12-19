@@ -12,11 +12,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
+@CrossOrigin
 public class AccountController {
 
     private final AccountService accountService;
@@ -26,6 +28,7 @@ public class AccountController {
     public ResponseEntity<?> login(
             @RequestParam("code") String code
     ) {
+        System.out.println("dd");
         String accessToken = kakaoService.kakaoToken(code);
         System.out.println(accessToken);
         UserInfo userInfo = kakaoService.kakaoUser(accessToken);
@@ -35,11 +38,19 @@ public class AccountController {
         return ResponseEntity.ok().body(response);
     }
 
+    @GetMapping("/userInfo")
+    public ResponseEntity<?> personalInfo(Authentication authentication
+    ) {
+        accountService.findAccount(Long.parseLong(authentication.getName()));
+        return ResponseEntity.ok().body(accountService.findAccount(Long.parseLong(authentication.getName())));
+    }
+
     // 유저 id 뿐만 아니라 발급한 토큰 또한 필요함.
     @PostMapping("/personalInfo")
-    public ResponseEntity<?> personalInfo(
+    public ResponseEntity<?> personalInfo(Authentication authentication,
             @RequestParam String userId
     ) {
+        accountService.addUserId(Long.parseLong(authentication.getName()), userId);
         return ResponseEntity.ok().build();
     }
 

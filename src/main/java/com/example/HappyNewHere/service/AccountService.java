@@ -34,6 +34,22 @@ public class AccountService {
         return accountRepository.findByUserIdContainingOrNicknameContaining(string, string, pageable).map(AccountDto::from);
     }
 
+    public AccountDto findAccount(Long accountId) {
+        return AccountDto.from(accountRepository.findById(accountId).orElseThrow(
+                () -> new IllegalArgumentException("해당 유저가 없습니다.")
+        ));
+    }
+
+    @Transactional
+    public AccountDto addUserId(Long accountId, String userId) {
+        Account account = accountRepository.findById(accountId).orElseThrow(
+                () -> new IllegalArgumentException("해당 유저가 없습니다.")
+        );
+        account.setUserId(userId);
+        accountRepository.save(account);
+        return AccountDto.from(account);
+    }
+
 
     public String saveAccount(UserInfo userInfo){
         String responseToken;
@@ -52,8 +68,6 @@ public class AccountService {
             accountRepository.save(account);
             responseToken = JwtUtils.createJwt(account.getAccountId(), secretKey, expiredMs);
         }
-
-
 
         return responseToken;
     }

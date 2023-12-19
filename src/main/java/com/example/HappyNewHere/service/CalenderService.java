@@ -2,7 +2,7 @@ package com.example.HappyNewHere.service;
 
 import com.example.HappyNewHere.domain.Account;
 import com.example.HappyNewHere.domain.Calender;
-import com.example.HappyNewHere.domain.Message;
+import com.example.HappyNewHere.domain.Messages;
 import com.example.HappyNewHere.dto.CalenderDto;
 import com.example.HappyNewHere.repository.AccountRepository;
 import com.example.HappyNewHere.repository.CalenderRepository;
@@ -44,8 +44,8 @@ public class CalenderService {
         if(calenderDto.isOwner()
                 && now.getMonthValue()==12
                 && now.getDayOfMonth()==25){
-            List<Message> messages = messageRepository.findByReceiver(viewer.get().getUserId());
-            calenderDto.setMessageList(messages);
+            List<Messages> messages = messageRepository.findByReceiver(viewer.get().getUserId());
+            calenderDto.setMessagesList(messages);
         }
 
 

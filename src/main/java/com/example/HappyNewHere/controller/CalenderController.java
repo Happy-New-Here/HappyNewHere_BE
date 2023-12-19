@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/calender")
 @RequiredArgsConstructor
+@CrossOrigin
 public class CalenderController {
     private final CalenderService calenderService;
 
