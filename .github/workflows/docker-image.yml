@@ -5,9 +5,9 @@ on:
     branches: ["develop"]
 
 jobs:
-  timeout-minutes: 360
   CI-CD:
     runs-on: ubuntu-latest
+    timeout-minutes: 360
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 17
