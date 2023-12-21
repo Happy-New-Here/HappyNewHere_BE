@@ -1,0 +1,23 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "develop"]
+
+jobs:
+  CI-CD:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build with Gradle
+        run: ./gradlew build -x test
+        
+      - name: Docker build & push 
+        if: contains(github.ref, 'develop')
+        run: |
+          docker login -u yooonwodyd00 -p dbswodyd91
+          docker build -f Dockerfile -t yooonwodyd00/happynewhere_be-app .
+          docker push yooonwodyd00/happynewhere_be-app
+
+        
+        
+      
