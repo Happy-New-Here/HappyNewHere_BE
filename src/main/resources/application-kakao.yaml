@@ -1,0 +1,3 @@
+kakao:
+  clientId: ${KAKAO_CLIENT_ID}
+  redirectUrl: ${KAKAO_REDIRECT_URL}
