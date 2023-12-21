@@ -51,6 +51,7 @@ public class AccountService {
     }
 
 
+
     public String saveAccount(UserInfo userInfo){
         String responseToken;
 
@@ -72,4 +73,11 @@ public class AccountService {
         return responseToken;
     }
 
+    public void addStateMsg(long l, String stateMsg) {
+        Account account = accountRepository.findById(l).orElseThrow(
+                () -> new IllegalArgumentException("해당 유저가 없습니다.")
+        );
+        account.setStateMsg(stateMsg);
+        accountRepository.save(account);
+    }
 }

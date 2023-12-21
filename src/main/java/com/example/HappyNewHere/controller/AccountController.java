@@ -47,10 +47,13 @@ public class AccountController {
 
     // 유저 id 뿐만 아니라 발급한 토큰 또한 필요함.
     @PostMapping("/personalInfo")
-    public ResponseEntity<?> personalInfo(Authentication authentication,
-            @RequestParam String userId
+    public ResponseEntity<?> personalInfo(
+            Authentication authentication,
+            @RequestParam String userId,
+            @RequestParam String stateMsg
     ) {
         accountService.addUserId(Long.parseLong(authentication.getName()), userId);
+        accountService.addStateMsg(Long.parseLong(authentication.getName()), stateMsg);
         return ResponseEntity.ok().build();
     }
 
@@ -72,8 +75,10 @@ public class AccountController {
         return ResponseEntity.ok(AccountDto.from(accountService.save(accountDto)));
     }
 
-    @GetMapping("/test")
-    public ResponseEntity<?> test() {
-        return ResponseEntity.ok().body("test");
-    }
+//    @GetMapping("/test")
+//    public ResponseEntity<?> test() {
+//        return ResponseEntity.ok().body("test");
+//    }
+
+    //
 }
