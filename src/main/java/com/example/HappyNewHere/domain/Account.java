@@ -17,13 +17,14 @@ public class Account {
     @Setter private String nickname;
     @Setter private String userId;
     @Setter private String profileImg;
+    @Setter private String stateMsg;
 
-
-    public Account(Long accountId, String nickname, String userId, String profileImg) {
+    public Account(Long accountId, String nickname, String userId, String profileImg, String stateMsg) {
         this.accountId = accountId;
         this.nickname = nickname;
         this.userId = userId;
         this.profileImg = profileImg;
+        this.stateMsg = stateMsg;
     }
 
     public Account(Long accountId) {
