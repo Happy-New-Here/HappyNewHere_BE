@@ -17,8 +17,8 @@ jobs:
           distribution: 'temurin'
       - name: Add env properties
         run: |
-          touch ./src/main/resources/env.yaml
-          echo "${{ secrets.ENV_YML }}" > ./src/main/resources/env.yaml
+          touch ./src/main/resources/env.yml
+          echo "${{ secrets.ENV_YML }}" > ./src/main/resources/env.yml
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
