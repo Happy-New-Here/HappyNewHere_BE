@@ -43,6 +43,7 @@ jobs:
           username: ${{ secrets.REMOTE_SSH_ID }}
           password: ${{ secrets.REMOTE_SSH_KEY }}
           port: ${{ secrets.REMOTE_SSH_PORT }}
+          command_timeout: 200m
           script: |
             sudo docker ps
             sudo docker pull yooonwodyd00/happynewhere_be-app
