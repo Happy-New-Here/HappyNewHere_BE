@@ -2,14 +2,20 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "develop"]
+    branches: ["develop"]
 
 jobs:
   CI-CD:
     runs-on: ubuntu-latest
     steps:
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
+      # gradle caching - 빌드 시간 향상
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+
       - name: Build with Gradle
         run: ./gradlew build -x test
 
