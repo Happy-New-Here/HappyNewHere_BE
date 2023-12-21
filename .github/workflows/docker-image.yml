@@ -5,6 +5,7 @@ on:
     branches: ["develop"]
 
 jobs:
+  timeout-minutes: 360
   CI-CD:
     runs-on: ubuntu-latest
     steps:
@@ -38,10 +39,10 @@ jobs:
         if: contains(github.ref, 'develop')
         uses: appleboy/ssh-action@master
         with:
-          host: 210.89.188.107
-          username: root
-          password: D8N9!79t3u
-          port: 3306
+          host: ${{ secrets.REMOTE_IP }}
+          username: ${{ secrets.REMOTE_SSH_ID }}
+          password: ${{ secrets.REMOTE_SSH_KEY }}
+          port: ${{ secrets.REMOTE_SSH_PORT }}
           script: |
             sudo docker ps
             sudo docker pull yooonwodyd00/happynewhere_be-app
