@@ -1,3 +1,6 @@
+spring:
+  config:
+    import: "classpath:env.yml"
 kakao:
   clientId: ${KAKAO_CLIENT_ID}
   redirectUrl: ${KAKAO_REDIRECT_URL}

@@ -1,4 +1,6 @@
 spring:
+  config:
+    import: "classpath:env.yml"
   profiles:
     include: rds,jwt,kakao
   jpa:

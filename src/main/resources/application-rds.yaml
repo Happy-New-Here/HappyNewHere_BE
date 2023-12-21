@@ -13,6 +13,8 @@
 #    password: root
 #
 spring:
+  config:
+    import: "classpath:env.yml"
   datasource:
     url: jdbc:mariadb://happy-new-year.cp3aplx9qafk.ap-northeast-2.rds.amazonaws.com/happy_new_year
     driver-class-name: org.mariadb.jdbc.Driver
