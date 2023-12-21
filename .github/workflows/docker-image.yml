@@ -38,10 +38,10 @@ jobs:
         if: contains(github.ref, 'develop')
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.REMOTE_IP }}
-          username: ${{ secrets.REMOTE_SSH_ID }}
-          key: ${{ secrets.REMOTE_SSH_KEY }}
-          port: ${{ secrets.REMOTE_SSH_PORT }}
+          host: ${{ happy.REMOTE_IP }}
+          username: ${{ happy.REMOTE_SSH_ID }}
+          key: ${{ happy.REMOTE_SSH_KEY }}
+          port: ${{ happy.REMOTE_SSH_PORT }}
           script: |
             sudo docker ps
             sudo docker pull yooonwodyd00/happynewhere_be-app
