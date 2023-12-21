@@ -33,3 +33,17 @@ jobs:
           docker login -u yooonwodyd00 -p dbswodyd91
           docker build -f Dockerfile -t yooonwodyd00/happynewhere_be-app .
           docker push yooonwodyd00/happynewhere_be-app
+      ## deploy to develop
+      - name: Deploy to dev
+        if: contains(github.ref, 'develop')
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.REMOTE_IP }}
+          username: ${{ secrets.REMOTE_SSH_ID }}
+          key: ${{ secrets.REMOTE_SSH_KEY }}
+          port: ${{ secrets.REMOTE_SSH_PORT }}
+          script: |
+            sudo docker ps
+            sudo docker pull yooonwodyd00/happynewhere_be-app
+            sudo docker compose down
+            sudo docker compose up -d
