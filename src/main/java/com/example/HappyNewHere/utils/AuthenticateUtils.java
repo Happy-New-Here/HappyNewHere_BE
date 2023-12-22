@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthenticateUtils {
     private final AccountRepository accountRepository;
+
     public String getUserId(Authentication authentication){
         if (authentication==null) throw new HappyException(ErrorCode.USER_NOT_FOUND);
         Long accountId = Long.parseLong(authentication.getName());
@@ -29,7 +30,7 @@ public class AuthenticateUtils {
     public Long getLongId(Authentication authentication){
         if (authentication==null) throw new HappyException(ErrorCode.USER_NOT_FOUND);
         Long accountId = Long.parseLong(authentication.getName());
-
+        System.out.println(accountId);
         return accountId;
     }
 

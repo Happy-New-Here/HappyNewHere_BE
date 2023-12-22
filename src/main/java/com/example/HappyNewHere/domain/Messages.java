@@ -21,8 +21,8 @@ public class Messages {
     private Long messageId;
     private LocalDateTime createdDate;
     private String context;
-    private String sender;
-    private String receiver;
+    private String sender; // SenderUserId
+    private String receiver; // ReciverUserId
     private int paperNum;
     private boolean anonymous;
 

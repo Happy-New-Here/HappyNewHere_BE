@@ -4,6 +4,7 @@ import com.example.HappyNewHere.domain.Messages;
 import com.example.HappyNewHere.dto.MessageDto;
 import com.example.HappyNewHere.dto.request.MessageRequestDto;
 import com.example.HappyNewHere.repository.MessageRepository;
+import com.example.HappyNewHere.utils.AuthenticateUtils;
 import jakarta.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class MessageService {
     private final MessageRepository messageRepository;
+    private final AuthenticateUtils authenticateUtils;
 
     // 메세지 생성 (Create)
     public MessageDto createMessage(String userId, MessageRequestDto messageRequestDto) {
@@ -22,7 +24,7 @@ public class MessageService {
         messages.setAnonymous(messageRequestDto.isAnonymous());
         messages.setCreatedDate(LocalDateTime.now());
         messages.setContext(messageRequestDto.getContext());
-        messages.setReceiver(messages.getReceiver());
+        messages.setReceiver(messageRequestDto.getReceiver());
         messages.setPaperNum(messageRequestDto.getPaperNum());
         messages.setSender(userId);
         messageRepository.save(messages);
