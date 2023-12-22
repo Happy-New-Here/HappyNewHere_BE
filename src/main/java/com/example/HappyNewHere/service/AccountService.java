@@ -4,6 +4,7 @@ package com.example.HappyNewHere.service;
 import com.example.HappyNewHere.domain.Account;
 import com.example.HappyNewHere.dto.AccountDto;
 import com.example.HappyNewHere.dto.UserInfo;
+import com.example.HappyNewHere.dto.request.AccountRequestDto;
 import com.example.HappyNewHere.repository.AccountRepository;
 import com.example.HappyNewHere.utils.JwtUtils;
 import jakarta.transaction.Transactional;
@@ -79,5 +80,12 @@ public class AccountService {
         );
         account.setStateMsg(stateMsg);
         accountRepository.save(account);
+    }
+
+    // 유저 id와 AccountRequestDto를 받아서 해당 유저의 정보를 수정한다.
+    public AccountDto updateAccount(Long accountId, AccountRequestDto accountRequestDto) {
+        // AccountId로 유저가 존재하는 지 확인하고 없을시 예외 반환
+        // 있다면 userId가 동일한지 확인하고 다르다면 예외 반환
+        // 이미 존재하는 유저이며, userId가 동일하다면 해당 유저의 정보를 수정한다.
     }
 }
