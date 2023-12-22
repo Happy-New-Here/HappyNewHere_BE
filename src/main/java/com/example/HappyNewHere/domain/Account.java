@@ -1,6 +1,7 @@
 package com.example.HappyNewHere.domain;
 
 
+import com.example.HappyNewHere.dto.request.AccountRequestDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -25,6 +26,10 @@ public class Account {
         this.userId = userId;
         this.profileImg = profileImg;
         this.stateMsg = stateMsg;
+    }
+
+    public static Account of(Long accountId, AccountRequestDto accountRequestDto) {
+        return new Account(accountId, accountRequestDto.nickname(), accountRequestDto.userId(), accountRequestDto.profileImg(), accountRequestDto.stateMsg());
     }
 
     public Account(Long accountId) {
