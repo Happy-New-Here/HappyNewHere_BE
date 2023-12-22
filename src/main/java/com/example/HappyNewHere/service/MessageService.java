@@ -2,8 +2,11 @@ package com.example.HappyNewHere.service;
 
 import com.example.HappyNewHere.domain.Messages;
 import com.example.HappyNewHere.dto.MessageDto;
+import com.example.HappyNewHere.dto.request.MessageRequestDto;
 import com.example.HappyNewHere.repository.MessageRepository;
+import com.example.HappyNewHere.utils.AuthenticateUtils;
 import jakarta.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -13,10 +16,17 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class MessageService {
     private final MessageRepository messageRepository;
+    private final AuthenticateUtils authenticateUtils;
 
     // 메세지 생성 (Create)
-    public MessageDto createMessage(MessageDto messageDto) {
-        Messages messages = new Messages(messageDto);
+    public MessageDto createMessage(String userId, MessageRequestDto messageRequestDto) {
+        Messages messages = new Messages();
+        messages.setAnonymous(messageRequestDto.isAnonymous());
+        messages.setCreatedDate(LocalDateTime.now());
+        messages.setContext(messageRequestDto.getContext());
+        messages.setReceiver(messageRequestDto.getReceiver());
+        messages.setPaperNum(messageRequestDto.getPaperNum());
+        messages.setSender(userId);
         messageRepository.save(messages);
         return new MessageDto(messages);
     }
@@ -40,7 +50,6 @@ public class MessageService {
     public MessageDto findOneMessage(Long messageId) {
         Messages messages = messageRepository.findById(messageId).orElseThrow(
                 () -> new IllegalArgumentException("조회 실패")
-                // ....? 람다함수 공부좀
         );
         return new MessageDto(messages);
     }

@@ -1,22 +1,10 @@
-#spring:
-#  datasource:
-#    url: jdbc:mariadb://database-1.ctw2wa3jmufy.ap-northeast-2.rds.amazonaws.com:3306/happynew
-#    driver-class-name: org.mariadb.jdbc.Driver
-#    username: admin
-#    password: dbswodyd91
-
-#spring:
-#  datasource:
-#    url: jdbc:mariadb://localhost:3306/chris
-#    driver-class-name: org.mariadb.jdbc.Driver
-#    username: root
-#    password: root
-#
 spring:
   config:
     import: "classpath:env.yml"
   datasource:
-    url: jdbc:mariadb://happy-new-year.cp3aplx9qafk.ap-northeast-2.rds.amazonaws.com/happy_new_year
+    url: ${RDS_URL}
     driver-class-name: org.mariadb.jdbc.Driver
     username: ${RDS_USERNAME}
     password: ${RDS_PASSWORD}
+
+##

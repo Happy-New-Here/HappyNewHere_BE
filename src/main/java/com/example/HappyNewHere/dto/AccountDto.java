@@ -1,6 +1,7 @@
 package com.example.HappyNewHere.dto;
 
 import com.example.HappyNewHere.domain.Account;
+import lombok.NoArgsConstructor;
 
 public record AccountDto(
         Long accountId,

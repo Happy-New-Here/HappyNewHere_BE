@@ -3,6 +3,7 @@ package com.example.HappyNewHere.controller;
 
 import com.example.HappyNewHere.dto.AccountDto;
 import com.example.HappyNewHere.dto.UserInfo;
+import com.example.HappyNewHere.dto.request.AccountRequestDto;
 import com.example.HappyNewHere.service.AccountService;
 import com.example.HappyNewHere.service.KakaoService;
 import com.example.HappyNewHere.utils.JwtUtils;
@@ -28,11 +29,8 @@ public class AccountController {
     public ResponseEntity<?> login(
             @RequestParam("code") String code
     ) {
-        System.out.println("dd");
         String accessToken = kakaoService.kakaoToken(code);
-        System.out.println(accessToken);
         UserInfo userInfo = kakaoService.kakaoUser(accessToken);
-        System.out.println(userInfo);
         String response = accountService.saveAccount(userInfo);
 
         return ResponseEntity.ok().body(response);
@@ -41,7 +39,6 @@ public class AccountController {
     @GetMapping("/userInfo")
     public ResponseEntity<?> personalInfo(Authentication authentication
     ) {
-        accountService.findAccount(Long.parseLong(authentication.getName()));
         return ResponseEntity.ok().body(accountService.findAccount(Long.parseLong(authentication.getName())));
     }
 
@@ -68,17 +65,10 @@ public class AccountController {
 
     // 유저 생성 (테스트용)
     @PostMapping("/createAccount")
-    public ResponseEntity<AccountDto> createAccount(
-            @RequestBody AccountDto accountDto
-    ) {
-        // ResponseEntity에 AccountDto를 담아서 반환
-        return ResponseEntity.ok(AccountDto.from(accountService.save(accountDto)));
+    public ResponseEntity<?> createAccount(
+            Authentication authentication,
+            @RequestBody AccountRequestDto accountRequestDto
+            ) {
+        return ResponseEntity.ok(accountService.updateAccount(Long.parseLong(authentication.getName()), accountRequestDto));
     }
-
-//    @GetMapping("/test")
-//    public ResponseEntity<?> test() {
-//        return ResponseEntity.ok().body("test");
-//    }
-
-    //
 }
