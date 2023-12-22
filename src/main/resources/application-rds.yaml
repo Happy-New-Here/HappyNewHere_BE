@@ -9,7 +9,7 @@ spring:
     hikari:
       connection-timeout: 300
       validation-timeout: 300
-      minimum-idle: 5
+      minimum-idle: 3
       max-lifetime: 180
       maximum-pool-size: 20
 
