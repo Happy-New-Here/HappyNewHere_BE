@@ -6,3 +6,5 @@ spring:
     driver-class-name: org.mariadb.jdbc.Driver
     username: ${RDS_USERNAME}
     password: ${RDS_PASSWORD}
+
+##
