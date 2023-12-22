@@ -2,11 +2,13 @@ package com.example.HappyNewHere.controller;
 
 
 import com.example.HappyNewHere.service.CalenderService;
+import com.example.HappyNewHere.utils.AuthenticateUtils;
 import jakarta.persistence.Entity;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,19 +17,20 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 public class CalenderController {
     private final CalenderService calenderService;
-
+    private final AuthenticateUtils authenticateUtils;
 
     @GetMapping("{userId}")
-    public ResponseEntity showCalender(@PathVariable("userId") String userId){
+    public ResponseEntity showCalender(
+            @PathVariable String userId,
+            Authentication authentication){
+
         //TODO: 헤더에서 accountId 가져오기
-        System.out.println(userId);
-        Long accountId = 12345L;
+        Long accountId = authenticateUtils.getLongId(authentication);
         return ResponseEntity.ok().body(calenderService.showCalender(accountId,userId));
     }
 
     @PostMapping()
     public ResponseEntity updateCalender(){
-
         return ResponseEntity.ok().body(null);
     }
 
