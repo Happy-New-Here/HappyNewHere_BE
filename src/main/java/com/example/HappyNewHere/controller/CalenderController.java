@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,11 +19,12 @@ public class CalenderController {
 
 
     @GetMapping("{userId}")
-    public ResponseEntity showCalender(@PathVariable("userId") String userId){
+    public ResponseEntity showCalender(
+            Authentication authentication){
+
         //TODO: 헤더에서 accountId 가져오기
-        System.out.println(userId);
         Long accountId = 12345L;
-        return ResponseEntity.ok().body(calenderService.showCalender(accountId,userId));
+        return ResponseEntity.ok().body(calenderService.showCalender(accountId));
     }
 
     @PostMapping()

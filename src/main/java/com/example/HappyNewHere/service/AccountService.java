@@ -68,7 +68,16 @@ public class AccountService {
             Account account = new Account();
             account.setAccountId(userInfo.getId());
             account.setNickname(userInfo.getProperties().getNickname());
-            account.setProfileImg(userInfo.getProperties().getProfile_image());
+
+            if (userInfo.getProperties().getProfile_image().equals("http://k.kakaocdn.net/dn/1G9kp/btsAot8liOn/8CWudi3uy07rvFNUkk3ER0/img_640x640.jpg")){
+
+                account.setProfileImg("https://dang-na-dong.s3.ap-northeast-2.amazonaws.com/Snowman.png");
+            }
+            else{
+                account.setProfileImg(userInfo.getProperties().getProfile_image());
+            }
+
+
 
             accountRepository.save(account);
             responseToken = JwtUtils.createJwt(account.getAccountId(), secretKey, expiredMs);
