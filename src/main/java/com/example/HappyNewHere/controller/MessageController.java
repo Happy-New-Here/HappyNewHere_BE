@@ -31,23 +31,23 @@ public class MessageController {
         return messageService.createMessage(userId,messageRequestDto);
     }
 
-    @GetMapping("/read/{userId}")
-    public List<MessageDto> findAllMessages(@PathVariable String userId) {
-        return messageService.findAllMessages(userId);
-    }
-
-    @GetMapping("/read/{userId}/{messageId}")
-    public MessageDto findMessage(@PathVariable String userId, @PathVariable Long messageId) {
-        return messageService.findOneMessage(messageId);
-    }
-
-    @PutMapping("/update")
-    public Long updateMessage(@RequestBody MessageDto messageDto) {
-        return messageService.updateMessage(messageDto);
-    }
-
-    @DeleteMapping("/delete/{messageId}")
-    public Long deleteMessage(@PathVariable Long messageId) {
-        return messageService.deleteMessage(messageId);
-    }
+//    @GetMapping("/read/{userId}")
+//    public List<MessageDto> findAllMessages(@PathVariable String userId) {
+//        return messageService.findAllMessages(userId);
+//    }
+//
+//    @GetMapping("/read/{userId}/{messageId}")
+//    public MessageDto findMessage(@PathVariable String userId, @PathVariable Long messageId) {
+//        return messageService.findOneMessage(messageId);
+//    }
+//
+//    @PutMapping("/update")
+//    public Long updateMessage(@RequestBody MessageDto messageDto) {
+//        return messageService.updateMessage(messageDto);
+//    }
+//
+//    @DeleteMapping("/delete/{messageId}")
+//    public Long deleteMessage(@PathVariable Long messageId) {
+//        return messageService.deleteMessage(messageId);
+//    }
 }

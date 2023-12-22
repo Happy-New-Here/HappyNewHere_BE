@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface MessageRepository extends JpaRepository<Messages, Long> {
-    List<Messages> findByReceiver(String receiver);
+    List<Messages> findByReceiver(Long receiver);
 }
