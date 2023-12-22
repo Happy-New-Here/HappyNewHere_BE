@@ -1,4 +1,6 @@
 spring:
+  config:
+    import: "classpath:env.yml"
   profiles:
     include: rds,jwt,kakao
   jpa:
@@ -6,4 +8,4 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
-## 테스트
+## cicd 테스트

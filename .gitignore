@@ -36,9 +36,4 @@ out/
 ### VS Code ###
 .vscode/
 
-
-
-src/main/resources/application-jwt.yaml
-src/main/resources/application-kakao.yaml
-src/main/resources/application-rds.yaml
-src/main/resources/static/index.html
+src/main/resources/env.yml

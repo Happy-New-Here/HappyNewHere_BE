@@ -1,0 +1,5 @@
+spring:
+  config:
+    import: "classpath:env.yml"
+jwt:
+  secret: ${JWT_SECRET}
