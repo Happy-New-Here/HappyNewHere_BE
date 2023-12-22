@@ -24,7 +24,7 @@ public class CalenderController {
 
         //TODO: 헤더에서 accountId 가져오기
         Long accountId = 12345L;
-        return ResponseEntity.ok().body(calenderService.showCalender(accountId));
+        return ResponseEntity.ok().body(calenderService.showCalender(accountId,"111"));
     }
 
     @PostMapping()

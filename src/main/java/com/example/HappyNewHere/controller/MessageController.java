@@ -27,7 +27,7 @@ public class MessageController {
             Authentication authentication,
             @RequestBody MessageRequestDto messageRequestDto)
     {
-        String userId = authenticateUtils.getAccount(authentication);
+        String userId = authenticateUtils.getUserId(authentication);
         return messageService.createMessage(userId,messageRequestDto);
     }
 
