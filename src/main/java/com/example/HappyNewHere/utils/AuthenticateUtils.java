@@ -26,4 +26,11 @@ public class AuthenticateUtils {
         return account.get().getUserId();
     }
 
+    public Long getLongId(Authentication authentication){
+        if (authentication==null) throw new HappyException(ErrorCode.USER_NOT_FOUND);
+        Long accountId = Long.parseLong(authentication.getName());
+
+        return accountId;
+    }
+
 }
