@@ -1,9 +1,12 @@
 package com.example.HappyNewHere.controller;
 
 import com.example.HappyNewHere.dto.MessageDto;
+import com.example.HappyNewHere.dto.request.MessageRequestDto;
 import com.example.HappyNewHere.service.MessageService;
+import com.example.HappyNewHere.utils.AuthenticateUtils;
 import java.util.List;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -11,15 +14,21 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 public class MessageController {
     private final MessageService messageService;
+    private final AuthenticateUtils authenticateUtils;
 
     // 권한들 넣어주셈요
-    public MessageController(MessageService messageService) {
+    public MessageController(MessageService messageService, AuthenticateUtils authenticateUtils) {
         this.messageService = messageService;
+        this.authenticateUtils = authenticateUtils;
     }
 
     @PostMapping("/create")
-    public MessageDto createMessage(@RequestBody MessageDto messageDto) {
-        return messageService.createMessage(messageDto);
+    public MessageDto createMessage(
+            Authentication authentication,
+            @RequestBody MessageRequestDto messageRequestDto)
+    {
+        String userId = authenticateUtils.getAccount(authentication);
+        return messageService.createMessage(userId,messageRequestDto);
     }
 
     @GetMapping("/read/{userId}")
