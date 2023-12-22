@@ -2,7 +2,7 @@ spring:
   config:
     import: "classpath:env.yml"
   datasource:
-    url: {RDS_URL}
+    url: ${RDS_URL}
     driver-class-name: org.mariadb.jdbc.Driver
     username: ${RDS_USERNAME}
     password: ${RDS_PASSWORD}
