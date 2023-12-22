@@ -49,6 +49,10 @@ public class AccountService {
         Optional<Account> account = accountRepository.findById(accountId);
         if(!account.isPresent())
             throw new HappyException(ErrorCode.USER_NOT_FOUND);
+
+        if(!checkUserId(userId))
+            throw new HappyException(ErrorCode.DUPLICATED_USER_NAME);
+
         account.get().setUserId(userId);
         accountRepository.save(account.get());
         return AccountDto.from(account.get());
@@ -91,10 +95,23 @@ public class AccountService {
         Optional<Account> account = accountRepository.findById(accountId);
         if(!account.isPresent())
             throw new HappyException(ErrorCode.USER_NOT_FOUND);
+        if(!checkUserId(accountRequestDto.userId()))
+            throw new HappyException(ErrorCode.DUPLICATED_USER_NAME);
         // 있다면 userId가 동일한지 확인하고 다르다면 예외 반환
         if(!account.get().getUserId().equals(accountRequestDto.userId()))
             throw new HappyException(ErrorCode.INVALID_PERMISSION);
         // 이미 존재하는 유저이며, userId가 동일하다면 해당 유저의 정보를 수정한다.
         return AccountDto.from(accountRepository.save(Account.of(accountId, accountRequestDto)));
+    }
+
+    //userId 중복체크
+    public boolean checkUserId(String userId){
+        if(userId.equals(null) || userId.equals("")){
+            return true;
+        }
+        if (accountRepository.findByUserId(userId).isPresent()) {
+            return false;
+        }
+        return true;
     }
 }
