@@ -12,18 +12,18 @@ public class MessageRequestDto {
     private boolean anonymous;
 
     // entity -> dto
-    public MessageRequestDto(Messages messages) {
-        this.context = messages.getContext();
-        this.receiver = messages.getReceiver();
-        this.paperNum = messages.getPaperNum();
-        this.anonymous = messages.isAnonymous();
-    }
-
-    public MessageRequestDto(String context, String receiver,
-                      int paperNum, boolean anonymous) {
-        this.context = context;
-        this.receiver = receiver;
-        this.paperNum = paperNum;
-        this.anonymous = anonymous;
-    }
+//    public MessageRequestDto(Messages messages) {
+//        this.context = messages.getContext();
+//        this.receiver = messages.getReceiver();
+//        this.paperNum = messages.getPaperNum();
+//        this.anonymous = messages.isAnonymous();
+//    }
+//
+//    public MessageRequestDto(String context, String receiver,
+//                      int paperNum, boolean anonymous) {
+//        this.context = context;
+//        this.receiver = receiver;
+//        this.paperNum = paperNum;
+//        this.anonymous = anonymous;
+//    }
 }

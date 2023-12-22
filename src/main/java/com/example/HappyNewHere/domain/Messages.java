@@ -21,31 +21,31 @@ public class Messages {
     private Long messageId;
     private LocalDateTime createdDate;
     private String context;
-    private String sender; // SenderUserId
-    private String receiver; // ReciverUserId
+    private Long sender; // SenderUserId
+    private Long receiver; // ReciverUserId
     private int paperNum;
     private boolean anonymous;
 
     // dto -> entity
-    public Messages(MessageDto messageDto) {
-        this.messageId = messageDto.getMessageId();
-        this.createdDate = messageDto.getCreatedDate();
-        this.context = messageDto.getContext();
-        this.sender = messageDto.getSender();
-        this.receiver = messageDto.getReceiver();
-        this.paperNum = messageDto.getPaperNum();
-        this.anonymous = messageDto.isAnonymous();  // 왜 바로접근가능??
-    }
+//    public Messages(MessageDto messageDto) {
+//        this.messageId = messageDto.getMessageId();
+//        this.createdDate = messageDto.getCreatedDate();
+//        this.context = messageDto.getContext();
+//        this.sender = messageDto.getSender();
+//        this.receiver = messageDto.getReceiver();
+//        this.paperNum = messageDto.getPaperNum();
+//        this.anonymous = messageDto.isAnonymous();  // 왜 바로접근가능??
+//    }
 
 
     // patch로 변경 ..?
-    public void update(MessageDto messageDto) {
-        this.messageId = messageDto.getMessageId();
-        this.createdDate = messageDto.getCreatedDate();
-        this.context = messageDto.getContext();
-        this.sender = messageDto.getSender();
-        this.receiver = messageDto.getReceiver();
-        this.paperNum = messageDto.getPaperNum();
-        this.anonymous = messageDto.isAnonymous();
-    }
+//    public void update(MessageDto messageDto) {
+//        this.messageId = messageDto.getMessageId();
+//        this.createdDate = messageDto.getCreatedDate();
+//        this.context = messageDto.getContext();
+//        this.sender = messageDto.getSender();
+//        this.receiver = messageDto.getReceiver();
+//        this.paperNum = messageDto.getPaperNum();
+//        this.anonymous = messageDto.isAnonymous();
+//    }
 }

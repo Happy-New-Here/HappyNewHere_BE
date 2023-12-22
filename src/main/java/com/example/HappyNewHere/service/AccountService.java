@@ -26,7 +26,7 @@ public class AccountService {
     private final AccountRepository accountRepository;
     @Value("${jwt.secret}")
     private String secretKey;
-    private Long expiredMs = 1000*60*60L; //한시간
+    private Long expiredMs = 1000*60*60*24L; //한시간
 
     @Transactional
     public Account save(AccountDto accountDto) {
