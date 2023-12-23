@@ -32,23 +32,16 @@ public class MessageService {
         if (sender.isEmpty()) throw new HappyException(ErrorCode.USER_NOT_FOUND);
         if (receiver.isEmpty()) throw new HappyException(ErrorCode.USER_NOT_FOUND);
 
-        Messages messages = new Messages();
-        messages.setAnonymous(messageRequestDto.isAnonymous());
-        messages.setCreatedDate(LocalDateTime.now());
-        messages.setContext(messageRequestDto.getContext());
-        messages.setReceiver(receiver.get().getAccountId());
-        messages.setPaperNum(messageRequestDto.getPaperNum());
-        messages.setSender(sender.get().getAccountId());
+        Messages messages = Messages.of(
+                LocalDateTime.now(),
+                messageRequestDto.getContext(),
+                sender.get().getAccountId(),
+                receiver.get().getAccountId(),
+                messageRequestDto.getPaperNum(),
+                messageRequestDto.isAnonymous()
+        );
         messageRepository.save(messages);
-
-        MessageDto messageDto = new MessageDto();
-        messageDto.setMessageId(messages.getMessageId());
-        messageDto.setAnonymous(messages.isAnonymous());
-        messageDto.setCreatedDate(messages.getCreatedDate());
-        messageDto.setContext(messages.getContext());
-        messageDto.setReceiver(messageRequestDto.getReceiver());
-        messageDto.setSender(userId);
-        return messageDto;
+        return MessageDto.from(messages);
     }
 
     // 내가 받은 메세지들 가져오기 (Read)
