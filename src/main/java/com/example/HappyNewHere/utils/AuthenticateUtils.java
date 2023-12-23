@@ -5,11 +5,8 @@ import com.example.HappyNewHere.exception.ErrorCode;
 import com.example.HappyNewHere.exception.HappyException;
 import com.example.HappyNewHere.repository.AccountRepository;
 import java.util.Optional;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.Transient;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -30,7 +27,7 @@ public class AuthenticateUtils {
     public Long getLongId(Authentication authentication){
         if (authentication==null) throw new HappyException(ErrorCode.USER_NOT_FOUND);
         Long accountId = Long.parseLong(authentication.getName());
-        System.out.println(accountId);
+
         return accountId;
     }
 

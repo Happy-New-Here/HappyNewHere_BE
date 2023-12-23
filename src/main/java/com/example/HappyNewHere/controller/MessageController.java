@@ -6,21 +6,18 @@ import com.example.HappyNewHere.service.MessageService;
 import com.example.HappyNewHere.utils.AuthenticateUtils;
 import java.util.List;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value="/message")
 @CrossOrigin
+@RequiredArgsConstructor
 public class MessageController {
     private final MessageService messageService;
     private final AuthenticateUtils authenticateUtils;
 
-    // 권한들 넣어주셈요
-    public MessageController(MessageService messageService, AuthenticateUtils authenticateUtils) {
-        this.messageService = messageService;
-        this.authenticateUtils = authenticateUtils;
-    }
 
     @PostMapping("/create")
     public MessageDto createMessage(

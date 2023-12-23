@@ -44,9 +44,8 @@ public class CalenderService {
         else calenderDto.setOwner(false);
 
         //3. 메세지 목록 담기(일치하는 멤버가 아니거나 25일이 아니면 null로 두기)
-        LocalDateTime now = LocalDateTime.now();
         if(calenderDto.isOwner()
-                // && now.getYear()==2024
+                // && LocalDateTime.now().getYear()==2024
         ){
             List<Messages> messages = messageRepository.findByReceiver(viewer.get().getAccountId());
             for(Messages msg : messages){
