@@ -42,7 +42,7 @@ public class MessageService {
                 messageRequestDto.isAnonymous()
         );
         messageRepository.save(messages);
-        return MessageDto.from(messages);
+        return MessageDto.from(messages,userId,messageRequestDto.getReceiver());
     }
 
     // 내가 받은 메세지들 가져오기 (Read)

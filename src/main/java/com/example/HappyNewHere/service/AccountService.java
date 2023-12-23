@@ -110,7 +110,7 @@ public class AccountService {
         if(!checkUserId(accountRequestDto.userId(),account.get()))
             throw new HappyException(ErrorCode.DUPLICATED_USER_NAME);
 
-        return AccountDto.from(accountRepository.save(Account.of(accountId, accountRequestDto)));
+        return AccountDto.from(accountRepository.save(Account.of(accountId, accountRequestDto, account.get().getProfileImg())));
     }
 
     //수정될userId 중복체크

@@ -11,12 +11,12 @@ public class MessageDto {
     private Long messageId;
     private LocalDateTime createdDate;
     private String context;
-    private Long sender; // kakaoI
-    private Long receiver; //
+    private String sender;
+    private String receiver;
     private int paperNum;
     private boolean anonymous;
 
-    public MessageDto(Long messageId, LocalDateTime createdDate, String context, Long sender, Long receiver,
+    public MessageDto(Long messageId, LocalDateTime createdDate, String context, String sender, String receiver,
                       int paperNum, boolean anonymous) {
         this.messageId = messageId;
         this.createdDate = createdDate;
@@ -27,7 +27,15 @@ public class MessageDto {
         this.anonymous = anonymous;
     }
 
-    public static MessageDto from(Messages messages) {
-        return new MessageDto(messages.getMessageId(), messages.getCreatedDate(), messages.getContext(), messages.getSender(), messages.getReceiver(), messages.getPaperNum(), messages.isAnonymous());
+    public static MessageDto from(Messages messages,String sender,String receiver) {
+        return new MessageDto(
+                messages.getMessageId(),
+                messages.getCreatedDate(),
+                messages.getContext(),
+                sender,
+                receiver,
+                messages.getPaperNum(),
+                messages.isAnonymous()
+        );
     }
 }
