@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class MessageService {
     private final MessageRepository messageRepository;
     private final AccountRepository accountRepository;
