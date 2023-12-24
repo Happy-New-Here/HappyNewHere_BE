@@ -6,6 +6,7 @@ import com.example.HappyNewHere.dto.UserInfo;
 import com.example.HappyNewHere.dto.request.AccountRequestDto;
 import com.example.HappyNewHere.service.AccountService;
 import com.example.HappyNewHere.service.KakaoService;
+import com.example.HappyNewHere.utils.AuthenticateUtils;
 import com.example.HappyNewHere.utils.JwtUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -21,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @CrossOrigin
 public class AccountController {
-
+    private final AuthenticateUtils authenticateUtils;
     private final AccountService accountService;
     private final KakaoService kakaoService;
 
@@ -39,7 +40,8 @@ public class AccountController {
     @GetMapping("/userInfo")
     public ResponseEntity<?> personalInfo(Authentication authentication
     ) {
-        return ResponseEntity.ok().body(accountService.findAccount(Long.parseLong(authentication.getName())));
+        Long accountId = authenticateUtils.getLongId(authentication);
+        return ResponseEntity.ok().body(accountService.findAccount(accountId));
     }
 
     // 유저 id 뿐만 아니라 발급한 토큰 또한 필요함.
@@ -49,8 +51,9 @@ public class AccountController {
             @RequestParam String userId,
             @RequestParam String stateMsg
     ) {
-        accountService.addUserId(Long.parseLong(authentication.getName()), userId);
-        accountService.addStateMsg(Long.parseLong(authentication.getName()), stateMsg);
+        Long accountId = authenticateUtils.getLongId(authentication);
+        accountService.addUserId(accountId, userId);
+        accountService.addStateMsg(accountId, stateMsg);
         return ResponseEntity.ok().build();
     }
 

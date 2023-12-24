@@ -14,38 +14,31 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@NoArgsConstructor
 public class Messages {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long messageId;
     private LocalDateTime createdDate;
     private String context;
-    private String sender; // SenderUserId
-    private String receiver; // ReciverUserId
+    private Long sender; // kakooId
+    private Long receiver; //kakaoid
     private int paperNum;
     private boolean anonymous;
 
-    // dto -> entity
-    public Messages(MessageDto messageDto) {
-        this.messageId = messageDto.getMessageId();
-        this.createdDate = messageDto.getCreatedDate();
-        this.context = messageDto.getContext();
-        this.sender = messageDto.getSender();
-        this.receiver = messageDto.getReceiver();
-        this.paperNum = messageDto.getPaperNum();
-        this.anonymous = messageDto.isAnonymous();  // 왜 바로접근가능??
+
+    private Messages() {
+    }
+    private Messages(LocalDateTime createdDate, String context, Long sender, Long receiver, int paperNum, boolean anonymous) {
+        this.createdDate = createdDate;
+        this.context = context;
+        this.sender = sender;
+        this.receiver = receiver;
+        this.paperNum = paperNum;
+        this.anonymous = anonymous;
     }
 
-
-    // patch로 변경 ..?
-    public void update(MessageDto messageDto) {
-        this.messageId = messageDto.getMessageId();
-        this.createdDate = messageDto.getCreatedDate();
-        this.context = messageDto.getContext();
-        this.sender = messageDto.getSender();
-        this.receiver = messageDto.getReceiver();
-        this.paperNum = messageDto.getPaperNum();
-        this.anonymous = messageDto.isAnonymous();
+    public static Messages of(LocalDateTime createdDate, String context, Long sender, Long receiver, int paperNum, boolean anonymous) {
+        return new Messages( createdDate, context, sender, receiver, paperNum, anonymous);
     }
+
 }

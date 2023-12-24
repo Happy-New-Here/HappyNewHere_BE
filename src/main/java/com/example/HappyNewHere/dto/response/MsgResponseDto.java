@@ -13,10 +13,10 @@ public record MsgResponseDto(
         boolean anonymous,
         LocalDateTime day
 ) {
-    public static MsgResponseDto of(Messages messages, String senderNickname){
+    public static MsgResponseDto of(Messages messages,String senderUserId, String senderNickname){
         return new MsgResponseDto(
                 messages.getContext(),
-                messages.getSender(),
+                senderUserId,
                 senderNickname,
                 messages.getPaperNum(),
                 messages.isAnonymous(),

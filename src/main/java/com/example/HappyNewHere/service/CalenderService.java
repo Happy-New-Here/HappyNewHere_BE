@@ -5,6 +5,8 @@ import com.example.HappyNewHere.domain.Calender;
 import com.example.HappyNewHere.domain.Messages;
 import com.example.HappyNewHere.dto.CalenderDto;
 import com.example.HappyNewHere.dto.response.MsgResponseDto;
+import com.example.HappyNewHere.exception.ErrorCode;
+import com.example.HappyNewHere.exception.HappyException;
 import com.example.HappyNewHere.repository.AccountRepository;
 import com.example.HappyNewHere.repository.CalenderRepository;
 import com.example.HappyNewHere.repository.MessageRepository;
@@ -42,11 +44,10 @@ public class CalenderService {
         else calenderDto.setOwner(false);
 
         //3. 메세지 목록 담기(일치하는 멤버가 아니거나 25일이 아니면 null로 두기)
-        LocalDateTime now = LocalDateTime.now();
         if(calenderDto.isOwner()
-                //&& now.getYear()==2024
+                // && LocalDateTime.now().getYear()==2024
         ){
-            List<Messages> messages = messageRepository.findByReceiver(userId);
+            List<Messages> messages = messageRepository.findByReceiver(viewer.get().getAccountId());
             for(Messages msg : messages){
                 calenderDto.getMessagesList().add(toMsgDto(msg));
             }
@@ -54,7 +55,9 @@ public class CalenderService {
         return calenderDto;
     }
     public MsgResponseDto toMsgDto(Messages messages){
-        return MsgResponseDto.of(messages,accountRepository.findByUserId(messages.getSender()).get().getNickname());
+        Optional<Account> account = accountRepository.findById(messages.getSender());
+        if (account.isEmpty()) throw new HappyException(ErrorCode.USER_NOT_FOUND);
+        return MsgResponseDto.of(messages,account.get().getUserId(),account.get().getNickname());
     }
 
 

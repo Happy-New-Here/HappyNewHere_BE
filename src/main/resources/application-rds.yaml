@@ -6,5 +6,11 @@ spring:
     driver-class-name: org.mariadb.jdbc.Driver
     username: ${RDS_USERNAME}
     password: ${RDS_PASSWORD}
+    hikari:
+      connection-timeout: 300
+      validation-timeout: 300
+      minimum-idle: 3
+      max-lifetime: 180
+      maximum-pool-size: 20
 
 ##

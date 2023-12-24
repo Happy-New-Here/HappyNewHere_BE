@@ -28,8 +28,8 @@ public class Account {
         this.stateMsg = stateMsg;
     }
 
-    public static Account of(Long accountId, AccountRequestDto accountRequestDto) {
-        return new Account(accountId, accountRequestDto.nickname(), accountRequestDto.userId(), accountRequestDto.profileImg(), accountRequestDto.stateMsg());
+    public static Account of(Long accountId, AccountRequestDto accountRequestDto, String profileImg) {
+        return new Account(accountId, accountRequestDto.nickname(), accountRequestDto.userId(), profileImg, accountRequestDto.stateMsg());
     }
 
     public Account(Long accountId) {

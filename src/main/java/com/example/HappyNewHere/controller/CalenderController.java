@@ -21,7 +21,7 @@ public class CalenderController {
 
     @GetMapping("{userId}")
     public ResponseEntity showCalender(
-            @PathVariable String userId,
+            @PathVariable(name = "userId") String userId,
             Authentication authentication){
 
         //TODO: 헤더에서 accountId 가져오기
